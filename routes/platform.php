@@ -20,6 +20,9 @@ use App\Orchid\Screens\Resources\BearsBiometryAnimalHandlingListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
+use App\Orchid\Screens\BearsBiometrySampleEditScreen;
+use App\Orchid\Screens\BearsBiometrySampleListScreen;
+
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -140,3 +143,5 @@ Route::screen('bears-biometry-animal-handlings', BearsBiometryAnimalHandlingList
 			->parent('platform.index')
 			->push('BearsBiometryAnimalHandlings', route('platform.resources.bearsbiometryanimalhandlings'));
 	});
+Route::screen('bearsBiometrySample/{bearsBiometrySample?}', BearsBiometrySampleEditScreen::class)->name('platform.bearsBiometrySample.edit');
+Route::screen('bearsBiometrySamples', BearsBiometrySampleListScreen::class)->name('platform.bearsBiometrySample.list');

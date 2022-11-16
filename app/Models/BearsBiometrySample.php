@@ -34,7 +34,6 @@ class BearsBiometrySample extends Model
 	use SoftDeletes, HasFactory;
 
 	protected $table = 'bears_biometry_samples';
-	public $incrementing = false;
 
 	protected $casts = [
 		'id' => 'int',

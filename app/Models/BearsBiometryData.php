@@ -101,7 +101,6 @@ class BearsBiometryData extends Model
 	use SoftDeletes;
 
 	protected $table = 'bears_biometry_data';
-	public $incrementing = false;
 
 	protected $casts = [
 		'id' => 'int',

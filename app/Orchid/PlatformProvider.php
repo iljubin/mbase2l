@@ -59,6 +59,16 @@ class PlatformProvider extends OrchidServiceProvider
 					Menu::make('Sub element item 2')->icon('heart'),
 				]),
 
+			Menu::make('MBase2L menu')
+				->icon('code')
+				->list([
+					Menu::make('Biometry Samples')
+						->icon('bag')
+						->route('platform.bearsBiometrySample.list')
+						->title('Navigation'),
+					Menu::make('Some other link for the future use')->icon('heart'),
+				]),
+
 			Menu::make('Basic Elements')
 				->title('Form controls')
 				->icon('note')
