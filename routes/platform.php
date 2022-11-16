@@ -15,6 +15,8 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use App\Orchid\Screens\Resources\BearsBiometryAnimalHandlingEditScreen;
+use App\Orchid\Screens\Resources\BearsBiometryAnimalHandlingListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -111,3 +113,30 @@ Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.exam
 Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
+
+// Platform > Resources > BearsBiometryAnimalHandlings
+Route::screen('bears-biometry-animal-handlings/{item}/edit', BearsBiometryAnimalHandlingEditScreen::class)
+	->name('platform.resources.bearsbiometryanimalhandlings.edit')
+	->breadcrumbs(function (Trail $trail, $item) {
+		return $trail
+			->parent('platform.resources.bearsbiometryanimalhandlings')
+			->push('BearsBiometryAnimalHandling', route('platform.resources.bearsbiometryanimalhandlings.edit', $item));
+	});
+
+// Platform > Resources > BearsBiometryAnimalHandlings > Create
+Route::screen('bears-biometry-animal-handlings/create', BearsBiometryAnimalHandlingEditScreen::class)
+	->name('platform.resources.bearsbiometryanimalhandlings.create')
+	->breadcrumbs(function (Trail $trail) {
+		return $trail
+			->parent('platform.resources.bearsbiometryanimalhandlings')
+			->push('Create', route('platform.resources.bearsbiometryanimalhandlings.create'));
+	});
+
+// Platform > Resources > BearsBiometryAnimalHandlings > BearsBiometryAnimalHandling
+Route::screen('bears-biometry-animal-handlings', BearsBiometryAnimalHandlingListScreen::class)
+	->name('platform.resources.bearsbiometryanimalhandlings')
+	->breadcrumbs(function (Trail $trail) {
+		return $trail
+			->parent('platform.index')
+			->push('BearsBiometryAnimalHandlings', route('platform.resources.bearsbiometryanimalhandlings'));
+	});
