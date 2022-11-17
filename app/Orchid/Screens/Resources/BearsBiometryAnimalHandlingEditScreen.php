@@ -30,8 +30,14 @@ class BearsBiometryAnimalHandlingEditScreen extends Screen
      */
     public function query(BearsBiometryAnimalHandling $item): iterable
     {
-        return [];
+        return [
+            'geo_location' => [
+                'lat' => 37.181244855427394,
+                'lng' => -3.6021993309259415,
+            ],
+        ];
     }
+
 
     /**
      * Display header name.
@@ -71,11 +77,16 @@ class BearsBiometryAnimalHandlingEditScreen extends Screen
      *
      * @return string[]
      */
-    public function asyncRemovalTypeChange(string $place_type_list_id = '')
+    public function asyncDisplayComponents(string $place_type_list_id = '', $geo_location, $sample_taken)
     {
         return [
-            'place_type_list_id' => $place_type_list_id,
-            'removalTypeChange' => $place_type_list_id,
+            'place_type_list_id_value' => $place_type_list_id,
+            'geo_location' => [
+                'lat' => 39,
+                'lng' => -4,
+            ],
+            'hunting_management_area' => $geo_location ? 'changed' : 'nothing',
+            'sample_taken_value' => true,
         ];
     }
 

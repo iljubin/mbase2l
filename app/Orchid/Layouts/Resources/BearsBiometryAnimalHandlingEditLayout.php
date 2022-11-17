@@ -17,6 +17,9 @@ use Orchid\Screen\Fields\Label;
 use Orchid\Screen\Fields\Map;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\Switcher;
+use Orchid\Screen\Fields\Upload;
+use Orchid\Screen\Actions\Button;
+use Orchid\Support\Color;
 
 class BearsBiometryAnimalHandlingEditLayout extends Listener
 {
@@ -27,7 +30,8 @@ class BearsBiometryAnimalHandlingEditLayout extends Listener
      */
     protected $targets = [
         'place_type_list_id',
-        'place_type_list_details',
+        'geo_location',
+        'sample_taken',
     ];
 
 	 /**
@@ -39,7 +43,7 @@ class BearsBiometryAnimalHandlingEditLayout extends Listener
 	 *
 	 * @var string
 	 */
-	protected $asyncMethod = 'asyncRemovalTypeChange';
+	protected $asyncMethod = 'asyncDisplayComponents';
 
     /**
      * @return Layout[]
@@ -91,15 +95,13 @@ class BearsBiometryAnimalHandlingEditLayout extends Listener
 					Select::make('place_type_list_id')
 						->fromModel(PlaceTypeList::class, 'name')
 						->title(__('Place of removal type'))
-						// ->title($this->query->get('place_type_list_id'))
 						->required()
-						->help(__('Please select the place of removal type.'))
-						->value($this->query->get('place_type_list_id')),
+						->help(__('Please select the place of removal type.')),
 
 					Input::make('place_type_list_details')
 						->title(__('!! Connect to "other" option in Place of removal type! Other place of removal type'))
 						->help(__('Please insert the other place of removal type.'))
-						->canSee($this->query->get('removalTypeChange') == 148),
+						->canSee($this->query->get('place_type_list_id_value') == 148),
 
 					// LEFT COLUMN END
 
@@ -137,16 +139,35 @@ class BearsBiometryAnimalHandlingEditLayout extends Listener
 
 					// SAMPLES START
 
-					Group::make([
-						Switcher::make('sample_taken')
-							->sendTrueOrFalse()
-							->title(__('!group border is missing! Genetic samples collected?'))
-							->value(true),
+					Switcher::make('sample_taken')
+						->sendTrueOrFalse()
+						->title(__('Genetic samples collected?'))
+						->value(true),
 
-						Label::make('SAMPLES GO HERE')
-							->title(__('SAMPLES GO HERE'))
-							->value(__('RELATED ENTITY 1 TO MANY')),
+					Input::make('sample_code_1')
+						->title('Sample Code 1')
+						->help('Please insert sample code 1')
+						->canSee($this->query->has('sample_taken_value')),
+
+					Input::make('sample_type_1')
+						->title('Sample type (sampled tissue) 1')
+						->help('Please insert sample type 1'),
+
+					Upload::make('images')
+						->groups('photo')
+						->help(__('Please upload sample images')),
+
+					Group::make([
+
+						Button::make('Add genetic sample')
+							->method('buttonClickProcessing')
+							->type(Color::PRIMARY()),
+
+						Button::make('Remove Last')
+							->method('buttonClickProcessing')
+							->type(Color::DANGER()),
 					])->autoWidth(),
+
 
 					// SAMPLES END
 
@@ -193,9 +214,10 @@ class BearsBiometryAnimalHandlingEditLayout extends Listener
 						->title(__('Location'))
 						->help(__('')),
 
-					Label::make('Hunting management area (LUO)')
+					Label::make('hunting_management_area')
 						->title(__('Hunting-management area (LUO):'))
-						->value(__('!! THIS SHOULD BE AUTOMATICALY GENERATED USING POSTGIS FROM MAP')),
+						->value($this->query->get('geo_locationChange')),
+						// ->value(__('!! THIS SHOULD BE AUTOMATICALY GENERATED USING POSTGIS FROM MAP')),
 
 					Label::make('hunting_ground')
 						->title(__('Hunting ground'))
