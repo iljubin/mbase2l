@@ -10,12 +10,20 @@
 @stop
 
 @section('content')
+<style>
+#map {
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
+</style>
 <div class="row">
     <div class="col-md">
         <fieldset class="mb-3" data-async="">
             <div class="bg-white rounded shadow-sm p-4 py-4 d-flex flex-column">
                 <div class="form-group">
-                    <label for="field-animal-id-bf20a4d427aed564a4a9863e77575f5ca2699581" class="form-label">Animal</label>
+                    <label for="field-animal" class="form-label">Animal</label>
 
                     <div data-controller="select">
                         <select {{ $attributes }}>
@@ -67,12 +75,12 @@
                     <small class="form-text text-muted">Please insert number and the year of removal in hunting administrative area.</small>
                 </div>
                 <div class="form-group" data-select2-id="13">
-                    <label for="field-animal-removal-list-id-5e2f7a6c965f3e21ff32676de4f4c96e3b607788" class="form-label">Type of removal
+                    <label for="field-animal-removal-list" class="form-label">Type of removal
                             <sup class="text-danger">*</sup>
                     </label>
 
                     <div data-controller="select" data-select2-id="12">
-                        <select class="form-control select2-hidden-accessible" name="animal_removal_list_id" title="Type of removal" required="required" id="field-animal-removal-list-id-5e2f7a6c965f3e21ff32676de4f4c96e3b607788" data-select2-id="field-animal-removal-list-id-5e2f7a6c965f3e21ff32676de4f4c96e3b607788" tabindex="-1" aria-hidden="true">
+                        <select class="form-control select2-hidden-accessible" name="animal_removal_list_id" title="Type of removal" required="required" id="field-animal-removal-list" data-select2-id="field-animal-removal-list" tabindex="-1" aria-hidden="true">
                                             <option value="3657" data-select2-id="6">Varstvo zavarovanih vrst in habitatov</option>
                                             <option value="3658" data-select2-id="28">Preprečevanje nastanka resne škode</option>
                                             <option value="3659" data-select2-id="29">Zagotavljanje zdravja in varnosti ljudi</option>
@@ -82,39 +90,39 @@
                         <small class="form-text text-muted">Please select the type of removal.</small>
                 </div>
                 <div class="form-group">
-                    <label for="field-telemetry-uid-f4c34b729ca946b2d4f47c9cbada81712d1ced0e" class="form-label">Ear-tag number or radio-collar (telemetry) identification
+                    <label for="field-telemetry-uid" class="form-label">Ear-tag number or radio-collar (telemetry) identification
 
                                 </label>
 
                     <div data-controller="input" data-input-mask="">
-                        <input class="form-control" name="telemetry_uid" title="Ear-tag number or radio-collar (telemetry) identification" id="field-telemetry-uid-f4c34b729ca946b2d4f47c9cbada81712d1ced0e">
+                        <input class="form-control" name="telemetry_uid" title="Ear-tag number or radio-collar (telemetry) identification" id="field-telemetry-uid">
                     </div>
 
                     <small class="form-text text-muted">Please describe animal-borne markings (ear-tags, collar, microchips, etc.).</small>
                 </div>
                 <div class="form-group">
-                    <label for="field-animal-handling-date-1a5f89efd0b53728d07ea74e6dc399fa3a2b58ef" class="form-label">Date and time
+                    <label for="field-animal-handling-date" class="form-label">Date and time
 
                             </label>
 
                     <div data-controller="input" data-input-mask="">
-                        <input class="form-control" name="animal_handling_date" type="datetime-local" title="Date and time" id="field-animal-handling-date-1a5f89efd0b53728d07ea74e6dc399fa3a2b58ef">
+                        <input class="form-control" name="animal_handling_date" type="datetime-local" title="Date and time" id="field-animal-handling-date">
                     </div>
 
                 </div>
                 <div class="form-group">
-                    <label for="field-place-of-removal-c19c6006da64fd22c48e2f864f20e8cfa4d9cfce" class="form-label">Geographical location/Local name
+                    <label for="field-place-of-removal" class="form-label">Geographical location/Local name
 
                             </label>
 
                     <div data-controller="input" data-input-mask="">
-                        <input class="form-control" name="place_of_removal" title="Geographical location/Local name" id="field-place-of-removal-c19c6006da64fd22c48e2f864f20e8cfa4d9cfce">
+                        <input class="form-control" name="place_of_removal" title="Geographical location/Local name" id="field-place-of-removal">
                     </div>
 
                         <small class="form-text text-muted">Please insert geographical location/Local name.</small>
                 </div>
                 <div class="form-group">
-                    <label for="field-place-type-list-id-17f273b4858bcd025acfc2f680aece6fe74fd54a" class="form-label">Place of removal type
+                    <label for="field-place-type-list" class="form-label">Place of removal type
                                     <sup class="text-danger">*</sup>
 
                             </label>
@@ -137,24 +145,24 @@
                         <small class="form-text text-muted">Please select the place of removal type.</small>
                 </div>
                 <div class="form-group">
-                    <label for="field-unknown-hunter-finder-f7380d609cf982ef0eb46ccbcc6b382b89f77786" class="form-label">!group border is missing! Unknown Hunder/Finder
+                    <label for="field-unknown-hunter-finder" class="form-label">!group border is missing! Unknown Hunder/Finder
 
                             </label>
 
                     <input hidden="" name="unknown_hunter_finder" value="0">
                     <div class="form-check form-switch">
-                        <input value="1" type="checkbox" class="form-check-input" novalue="0" yesvalue="1" name="unknown_hunter_finder" title="!group border is missing! Unknown Hunder/Finder" id="field-unknown-hunter-finder-f7380d609cf982ef0eb46ccbcc6b382b89f77786" checked="">
-                        <label class="form-check-label" for="field-unknown-hunter-finder-f7380d609cf982ef0eb46ccbcc6b382b89f77786"></label>
+                        <input value="1" type="checkbox" class="form-check-input" novalue="0" yesvalue="1" name="unknown_hunter_finder" title="!group border is missing! Unknown Hunder/Finder" id="field-unknown-hunter-finder" checked="">
+                        <label class="form-check-label" for="field-unknown-hunter-finder"></label>
                     </div>
 
                 </div>
                 <div class="row form-group align-items-baseline">
                     <div class="col-auto pe-md-0">
                         <div class="form-group">
-                            <label for="field-hunter-finder-name-3c746438890a14734289a5503322772c691a6331" class="form-label">!! Hide depending on the checkbox! Hunter/Finder name</label>
+                            <label for="field-hunter-finder-name" class="form-label">!! Hide depending on the checkbox! Hunter/Finder name</label>
 
                             <div data-controller="input" data-input-mask="">
-                                <input class="form-control" name="hunter_finder_name" title="!! Hide depending on the checkbox! Hunter/Finder name" id="field-hunter-finder-name-3c746438890a14734289a5503322772c691a6331">
+                                <input class="form-control" name="hunter_finder_name" title="!! Hide depending on the checkbox! Hunter/Finder name" id="field-hunter-finder-name">
                             </div>
 
                             <small class="form-text text-muted">Please insert the name of the hunter/finder</small>
@@ -162,10 +170,10 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-group">
-                            <label for="field-hunter-finder-surname-d9f5433320e85760cdafa57930fc34f421095c63" class="form-label">!! Hide depending on the checkbox! Hunter/Finder surname</label>
+                            <label for="field-hunter-finder-surname" class="form-label">!! Hide depending on the checkbox! Hunter/Finder surname</label>
 
                             <div data-controller="input" data-input-mask="">
-                                <input class="form-control" name="hunter_finder_surname" title="!! Hide depending on the checkbox! Hunter/Finder surname" id="field-hunter-finder-surname-d9f5433320e85760cdafa57930fc34f421095c63">
+                                <input class="form-control" name="hunter_finder_surname" title="!! Hide depending on the checkbox! Hunter/Finder surname" id="field-hunter-finder-surname">
                             </div>
 
                             <small class="form-text text-muted">Please insert the surname of the hunter/finder</small>
@@ -175,12 +183,12 @@
                 <div class="row form-group align-items-baseline">
                     <div class="col-auto pe-md-0 ">
                         <div class="form-group">
-                            <label for="field-witness-accompanying-person-name-502ae272e398f74e77f83d98cfa3333feec395cd" class="form-label">Witness/Accompanying person name
+                            <label for="field-witness-accompanying-person-name" class="form-label">Witness/Accompanying person name
 
                                     </label>
 
                             <div data-controller="input" data-input-mask="">
-                                <input class="form-control" name="witness_accompanying_person_name" title="Witness/Accompanying person name" id="field-witness-accompanying-person-name-502ae272e398f74e77f83d98cfa3333feec395cd">
+                                <input class="form-control" name="witness_accompanying_person_name" title="Witness/Accompanying person name" id="field-witness-accompanying-person-name">
                             </div>
 
                             <small class="form-text text-muted">Please insert the name of the Witness/Accompanying person</small>
@@ -190,10 +198,10 @@
                     </div>
                     <div class="col-auto">
                         <div class="form-group">
-                            <label for="field-hunter-finder-surname-660a6dafbd017c976c77c4faf6cf5609aa98a5e7" class="form-label">Witness/Accompanying person surname</label>
+                            <label for="field-hunter-finder-surname" class="form-label">Witness/Accompanying person surname</label>
 
                             <div data-controller="input" data-input-mask="">
-                                <input class="form-control" name="hunter_finder_surname" title="Witness/Accompanying person surname" id="field-hunter-finder-surname-660a6dafbd017c976c77c4faf6cf5609aa98a5e7">
+                                <input class="form-control" name="hunter_finder_surname" title="Witness/Accompanying person surname" id="field-hunter-finder-surname">
                             </div>
 
                             <small class="form-text text-muted">Please insert the surname of the Witness/Accompanying person</small>
@@ -201,22 +209,22 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="field-sample-taken-affd11c35e6a241662773ae88cc458b968782be6" class="form-label">Genetic samples collected?</label>
+                    <label for="field-sample-taken" class="form-label">Genetic samples collected?</label>
 
                     <input hidden="" name="sample_taken" value="0">
                     <div class="form-check form-switch">
-                        <input value="1" type="checkbox" class="form-check-input" novalue="0" yesvalue="1" name="sample_taken" title="Genetic samples collected?" id="field-sample-taken-affd11c35e6a241662773ae88cc458b968782be6"  onclick="switch_display_div();">
-                        <label class="form-check-label" for="field-sample-taken-affd11c35e6a241662773ae88cc458b968782be6"></label>
+                        <input value="1" type="checkbox" class="form-check-input" novalue="0" yesvalue="1" name="sample_taken" title="Genetic samples collected?" id="field-sample-taken" checked="" onclick="switch_display_div();">
+                        <label class="form-check-label" for="field-sample-taken"></label>
                     </div>
 
                 </div>
                 <div id="dynamic_div" style="display:none;">
                 <div class='dynamic_content'>
                 <div class="form-group">
-                    <label for="field-sample-type-1-a295912e45e73752f73ee07648096d2002703802" class="form-label">Sample type (sampled tissue) 1</label>
+                    <label for="field-sample-type-1" class="form-label">Sample type (sampled tissue) 1</label>
 
                     <div data-controller="input" data-input-mask="">
-                        <input class="form-control" name="sample_type_1" title="Sample type (sampled tissue) 1" id="field-sample-type-1-a295912e45e73752f73ee07648096d2002703802">
+                        <input class="form-control" name="sample_type_1" title="Sample type (sampled tissue) 1" id="field-sample-type-1">
                     </div>
 
                     <small class="form-text text-muted">Please insert sample type 1</small>
@@ -323,10 +331,10 @@
                 <div id='dynamic_div_origin_content' style="display:none;">
                 <div class='dynamic_content'>
                 <div class="form-group">
-                    <label for="field-sample-type-1-a295912e45e73752f73ee07648096d2002703802" class="form-label">Sample type (sampled tissue) 1</label>
+                    <label for="field-sample-type-1" class="form-label">Sample type (sampled tissue) 1</label>
 
                     <div data-controller="input" data-input-mask="">
-                        <input class="form-control" name="sample_type_1" title="Sample type (sampled tissue) 1" id="field-sample-type-1-a295912e45e73752f73ee07648096d2002703802">
+                        <input class="form-control" name="sample_type_1" title="Sample type (sampled tissue) 1" id="field-sample-type-1">
                     </div>
 
                     <small class="form-text text-muted">Please insert sample type 1</small>
@@ -471,14 +479,14 @@
                     pe-md-0
             ">
             <div class="form-group">
-            <label for="field-hair-sample-taken-dd87d1e5edc7cb846debf4016397594d89a38a61" class="form-label">!group border is missing! Hair sample collected?
+            <label for="field-hair-sample-taken" class="form-label">!group border is missing! Hair sample collected?
 
                     </label>
 
     <input hidden="" name="hair_sample_taken" value="0">
         <div class="form-check form-switch">
-            <input value="1" type="checkbox" class="form-check-input" novalue="0" yesvalue="1" name="hair_sample_taken" title="!group border is missing! Hair sample collected?" id="field-hair-sample-taken-dd87d1e5edc7cb846debf4016397594d89a38a61" checked="">
-            <label class="form-check-label" for="field-hair-sample-taken-dd87d1e5edc7cb846debf4016397594d89a38a61"></label>
+            <input value="1" type="checkbox" class="form-check-input" novalue="0" yesvalue="1" name="hair_sample_taken" title="!group border is missing! Hair sample collected?" id="field-hair-sample-taken" checked="">
+            <label class="form-check-label" for="field-hair-sample-taken"></label>
         </div>
 
     </div>
@@ -490,14 +498,14 @@
                     pe-md-0
             ">
             <div class="form-group">
-            <label for="field-blood-sample-taken-04021e62c56abcd3eeb3862bfdf9df3fdc0efcb9" class="form-label">!group border is missing! Blood sample collected?
+            <label for="field-blood-sample-taken" class="form-label">!group border is missing! Blood sample collected?
 
                     </label>
 
     <input hidden="" name="blood_sample_taken" value="0">
         <div class="form-check form-switch">
-            <input value="1" type="checkbox" class="form-check-input" novalue="0" yesvalue="1" name="blood_sample_taken" title="!group border is missing! Blood sample collected?" id="field-blood-sample-taken-04021e62c56abcd3eeb3862bfdf9df3fdc0efcb9" checked="">
-            <label class="form-check-label" for="field-blood-sample-taken-04021e62c56abcd3eeb3862bfdf9df3fdc0efcb9"></label>
+            <input value="1" type="checkbox" class="form-check-input" novalue="0" yesvalue="1" name="blood_sample_taken" title="!group border is missing! Blood sample collected?" id="field-blood-sample-taken" checked="">
+            <label class="form-check-label" for="field-blood-sample-taken"></label>
         </div>
 
     </div>
@@ -509,12 +517,12 @@
 
             ">
             <div class="form-group">
-            <label for="field-tooth-type-list-id-9ecdb2859d6b0f71c34e8cb0a32225bb3ec3338e" class="form-label">Tooth Type
+            <label for="field-tooth-type-list-id" class="form-label">Tooth Type
 
                     </label>
 
     <div data-controller="select">
-        <select class="form-control select2-hidden-accessible" name="tooth_type_list_id" title="Tooth Type" id="field-tooth-type-list-id-9ecdb2859d6b0f71c34e8cb0a32225bb3ec3338e" data-select2-id="field-tooth-type-list-id-9ecdb2859d6b0f71c34e8cb0a32225bb3ec3338e" tabindex="-1" aria-hidden="true">
+        <select class="form-control select2-hidden-accessible" name="tooth_type_list_id" title="Tooth Type" id="field-tooth-type-list-id" data-select2-id="field-tooth-type-list-id" tabindex="-1" aria-hidden="true">
                             <option value="" data-select2-id="10">&lt;Empty&gt;</option>
                             <option value="152">Zgornji P1</option>
                             <option value="153">Zgornji P2</option>
@@ -539,12 +547,12 @@
                     pe-md-0
             ">
             <div class="form-group">
-            <label for="field-taxidermist-name-fc4bb916d5fe183f66e18ab54fc70f27d02bace9" class="form-label">Taxidermist name
+            <label for="field-taxidermist-name" class="form-label">Taxidermist name
 
                     </label>
 
     <div data-controller="input" data-input-mask="">
-        <input class="form-control" name="taxidermist_name" title="Taxidermist name" id="field-taxidermist-name-fc4bb916d5fe183f66e18ab54fc70f27d02bace9">
+        <input class="form-control" name="taxidermist_name" title="Taxidermist name" id="field-taxidermist-name">
     </div>
 
             <small class="form-text text-muted">Please insert the name of the Taxidermist</small>
@@ -557,12 +565,12 @@
 
             ">
             <div class="form-group">
-            <label for="field-taxidermist-surname-709b9f00ac91bb767f36c316dea591353a2c0380" class="form-label">Taxidermist surname
+            <label for="field-taxidermist-surname" class="form-label">Taxidermist surname
 
-                    </label>
+        	</label>
 
     <div data-controller="input" data-input-mask="">
-        <input class="form-control" name="taxidermist_surname" title="Taxidermist surname" id="field-taxidermist-surname-709b9f00ac91bb767f36c316dea591353a2c0380">
+        <input class="form-control" name="taxidermist_surname" title="Taxidermist surname" id="field-taxidermist-surname">
     </div>
 
             <small class="form-text text-muted">Please insert the surname of the Taxidermist</small>
@@ -578,11 +586,50 @@
     <div class="col-md">
         <fieldset class="mb-3" data-async="">
             <div class="bg-white rounded shadow-sm p-4 py-4 d-flex flex-column">
+                <div id="map"></div>
+                <div class="row mt-3">
+                    <div class="col-md">
+                        <label for="geo_location[lat]">Latitude</label>
+                        <input class="form-control" id="marker__latitude" data-map-target="lat" name="geo_location[lat]" value="">
+                    </div>
+                    <div class="col-md">
+                        <label for="geo_location[lng]">Longitude</label>
+                        <input class="form-control" id="marker__longitude" data-map-target="lng" name="geo_location[lng]" value="">
+                    </div>
+                    <div class="col-md">
+                        <label>Object search</label>
+                        <input class="form-control" type="text" value="" data-map-target="search" data-action="keyup->map#search">
+                    </div>
+                </div>
+                <div class="form-group">
+            <label for="field-hunting-management-area" class="form-label">Hunting-management area (LUO):
+
+                    </label>
+
+
+
+    </div>
+    <div class="form-group">
+            <label for="field-hunting-ground" class="form-label">Hunting ground
+
+                    </label>
+
+    <p id="field-hunting-ground" title="Hunting ground">
+            !! THIS SHOULD BE AUTOMATICALY GENERATED USING POSTGIS FROM MAP
+        </p>
+
+    </div>
             </div>
+
         </fieldset>
 
     </div>
 </div>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIkGfNH8Rqht-VeBTJLvnmQ2F82Vzp5-E&callback=initMap&v=weekly"
+      defer
+    ></script>
 <script>
     function switch_display_div(){
         if($('#dynamic_div').css('display')=='none'){
@@ -607,5 +654,35 @@
     function remove_dynamic_content(){
         $("#dynamic_div").children().last().remove();
     }
+    function initMap() {
+        // The location of Uluru
+        const uluru = { lat: -25.344, lng: 131.031 };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 4,
+            center: uluru,
+        });
+        // The marker, positioned at Uluru
+        let marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+        });
+        $('#marker__latitude').val(uluru.lat);
+        $('#marker__longitude').val(uluru.lng);
+        map.addListener("click", (mapsMouseEvent) => {
+
+            marker.setMap(null);
+            marker = new google.maps.Marker({
+            position: mapsMouseEvent.latLng,
+            map: map,
+        });
+        $('#marker__latitude').val(mapsMouseEvent.latLng.lat);
+        $('#marker__longitude').val(mapsMouseEvent.latLng.lng);
+
+        });
+    }
+    $(document).ready(function(){
+        initMap();
+    });
 </script>
 @stop
