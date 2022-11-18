@@ -101,6 +101,10 @@ class PlatformProvider extends OrchidServiceProvider
 				->route('platform.resources.bearsbiometryanimalhandlings')
 				->title('Resources'),
 
+			Menu::make('New Bears Biometry Animal Handlings')
+				->icon('folder')
+				->route('platform.bearsBiometryAnimalHandlings.create'),
+
 			/* Menu::make('Documentation')
 				->title('Docs')
 				->icon('docs')

@@ -50,6 +50,10 @@ Route::middleware(['web'])->group(
 			return $user->group;
 		});
 
+		Route::get('admin/custom/bears-biometry-animal-handlings/create',
+			[\App\Http\Controllers\BearsBiometryAnimalHandlingController::class, 'index'])
+			->name('platform.bearsBiometryAnimalHandlings.create');
+
 		Route::get('locale/{locale}', function ($locale) {
 
 			session(['locale' => $locale]);
